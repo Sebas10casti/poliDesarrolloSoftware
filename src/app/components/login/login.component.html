@@ -1,0 +1,48 @@
+<div class="container-fluid pr-0">
+  <div
+    class="row d-flex justify-content-center align-items-center"
+    style="height: 100vh"
+  >
+    <div class="col-sm-12 col-md-6">
+      <!-- Cuadro de Login -->
+          <h5 class="card-title text-center">Iniciar sesión</h5>
+            <div class="mb-3 mt-3">
+              <label for="exampleInputEmail1" class="form-label">Usuario</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Contraseña</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="pwd"
+              />
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" (click)="validateUser()" class="btn btn-primary">
+                Ingresar
+              </button>
+            </div>
+
+          <span class="text-danger mt-3" [hidden]="!showMessage">
+            Usuario o contraseña incorrecto
+          </span>
+        </div>
+
+    <div class="d-none d-md-block col-md-6 p-0">
+      <!-- Imagen -->
+      <img
+        src="./../assets/E-commerce.png"
+        class="w-100"
+        style="height: 100vh"
+        alt="Imagen"
+      />
+    </div>
+  </div>
+</div>

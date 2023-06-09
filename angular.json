@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -38,9 +39,9 @@
             "production": {
               "budgets": [
                 {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                "type": "initial",
+                "maximumWarning": "4mb",
+                "maximumError": "6mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -100,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f432283b-746f-47a8-bb5d-f2767ff9064b"
   }
 }
