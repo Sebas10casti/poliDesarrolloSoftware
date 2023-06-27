@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ProductsServiceTsService} from '../../services/products.service.ts.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './list.component.html',
@@ -14,11 +15,17 @@ export class ListComponent {
   maxPrice: number = 9999999;
   selectCategory: string = '';
   searchGlobal: string = '';
-
-  constructor(private productsServiceTsService:ProductsServiceTsService ){}
+  counter: number = 0;
+  itemDetail: any[] = [];
+  showDetailItem: boolean = false;
+  showCart: boolean = false;
+  constructor(private productsServiceTsService:ProductsServiceTsService,  private router: Router){}
 
   ngOnInit(): void {
-    this.productsServiceTsService.listproducts().subscribe({next: (data) => {this.items = data; this.itemsFilters = data}})
+    this.productsServiceTsService.listproducts().subscribe({next: (data: any) => {this.items = data; this.itemsFilters = data}})
+    this.productsServiceTsService.myCart$.subscribe(products => {
+      this.counter = products.length;
+    });
   }
 
 
@@ -39,5 +46,22 @@ export class ListComponent {
     this.maxPrice = 9999999;
     this.selectCategory = '';
     this.itemsFilters = [...this.items]
+  }
+
+  addItemCar(item: any){
+    this.productsServiceTsService.addProduct(item);
+  }
+
+  openProduct(item: any){
+    this.itemDetail = item;
+    this.showDetailItem = true;
+  }
+
+  closeDetail(){
+    this.showDetailItem = false;
+  }
+
+  toogleCart(state: boolean){
+    this.showCart = state;
   }
 }

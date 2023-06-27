@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +7,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ListComponent } from './components/list/list.component';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { IconCamera, IconHeart, IconBrandGithub } from 'angular-tabler-icons/icons';
+import { DetailProductComponent } from './components/detail-product/detail-product.component';
+import { ProductComponent } from './components/product/product.component';
+import { ListCartComponent } from './components/list-cart/list-cart.component';
 
 
 const icons = {
@@ -16,10 +19,14 @@ const icons = {
 };
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     LoginComponent,
-    ListComponent
+    ListComponent,
+    DetailProductComponent,
+    ProductComponent,
+    ListCartComponent
   ],
   imports: [
     BrowserModule,

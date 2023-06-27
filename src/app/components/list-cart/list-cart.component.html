@@ -1,0 +1,23 @@
+<div class="panel container">
+  <div class="pointer btn btn-danger rounded-0" (click)="closeCartFN()">
+    &times;
+  </div>
+
+  <ul class="list-group list-group-flush mt-5" >
+    <li *ngFor="let item of list" class="list-group-item">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{item.name}}</h5>
+        <small (click)="removeProduct(item)"><i class="ti ti-trash"></i>Eliminar</small>
+      </div>
+      <p class="mb-1">{{ item.price | currency : "COP $" : "symbol" : "0.0-0" }}</p>
+      <small>{{item.category}}</small>
+    </li>
+  </ul>
+
+  <div class="row mt-5">
+    <span><b>Total a pagar:</b> {{price | currency : "COP $" : "symbol" : "0.0-0"}}</span>
+    <button class="btn btn-primary btn-lg btn-block">
+      <i class="ti ti-shopping-cart fs-5"></i> Comprar
+    </button>
+  </div>
+</div>

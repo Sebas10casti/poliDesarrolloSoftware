@@ -1,0 +1,10 @@
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 50%; /* Ajusta el ancho del panel según tus necesidades */
+  background-color: #f1f1f1;
+  z-index: 11;
+}
+

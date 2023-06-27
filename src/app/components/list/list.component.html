@@ -1,4 +1,4 @@
-<div style="background-color: #ebebeb; min-height: 100vh;">
+<div style="background-color: #ebebeb; min-height: 100vh">
   <nav class="navbar bg-dark border-bottom border-bottom-dark">
     <div class="container-fluid">
       <a class="navbar-brand text-white">eCatalog</a>
@@ -10,24 +10,47 @@
           (input)="fnSearchGlobal()"
           placeholder="Buscar"
         />
-        <button type="button" class="btn btn-primary position-relative me-2">
+        <button
+          type="button"
+          class="btn btn-primary position-relative me-2"
+          [disabled]="counter === 0"
+          (click)="toogleCart(true)"
+        >
           <i class="ti ti-shopping-cart fs-5"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            99+
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            {{ counter }}
           </span>
         </button>
       </div>
     </div>
   </nav>
 
-
-  <div class="mt-2 ms-2" [hidden]="searchGlobal === ''">Resultados de tu busqueda por: {{searchGlobal}}</div>
+  <div class="mt-2 ms-2" [hidden]="searchGlobal === ''">
+    Resultados de tu busqueda por: {{ searchGlobal }}
+  </div>
 
   <div class="container-fluid mt-4 mb-4">
     <div class="row mb-4">
       <div class="col-12 text-end">
-        <button class="btn btn-danger" [hidden]="!(minPrice !== 10000 || selectCategory !=='' || maxPrice !== 9999999)" (click)="clearFilters()" style="margin-right: 10px;"><i class="ti ti-trash"></i> Limpiar</button>
-        <button class="btn btn-secondary" (click)="showFilter = !showFilter"><i class="ti ti-filter"></i> Filtrar</button>
+        <button
+          class="btn btn-danger"
+          [hidden]="
+            !(
+              minPrice !== 10000 ||
+              selectCategory !== '' ||
+              maxPrice !== 9999999
+            )
+          "
+          (click)="clearFilters()"
+          style="margin-right: 10px"
+        >
+          <i class="ti ti-trash"></i> Limpiar
+        </button>
+        <button class="btn btn-secondary" (click)="showFilter = !showFilter">
+          <i class="ti ti-filter"></i> Filtrar
+        </button>
       </div>
     </div>
 
@@ -37,42 +60,84 @@
           <div class="row">
             <div class="col-4">
               <label for="customRange2" class="form-label">Categoria</label>
-              <select class="form-select" aria-label="Default select example" [(ngModel)]="selectCategory" (change)="advancedFilters('category')">
-                <option *ngFor="let item of ['vehiculos', 'tecnologia', 'deportes', 'hogar']" [value]="item">{{item}}</option>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                [(ngModel)]="selectCategory"
+                (change)="advancedFilters('category')"
+              >
+                <option
+                  *ngFor="
+                    let item of ['vehiculos', 'tecnologia', 'deportes', 'hogar']
+                  "
+                  [value]="item"
+                >
+                  {{ item }}
+                </option>
               </select>
             </div>
             <div class="col-4">
-              <label for="customRange2" class="form-label">Precio Minimo {{minPrice | currency : "COP $" : "symbol" : "0.0-0"}}</label>
-              <input type="range" class="form-range" min="10000" max="9999999" id="customRange1" [(ngModel)]="minPrice" (input)="advancedFilters('min')">
+              <label for="customRange2" class="form-label"
+                >Precio Minimo
+                {{ minPrice | currency : "COP $" : "symbol" : "0.0-0" }}</label
+              >
+              <input
+                type="range"
+                class="form-range"
+                min="10000"
+                max="9999999"
+                id="customRange1"
+                [(ngModel)]="minPrice"
+                (input)="advancedFilters('min')"
+              />
             </div>
             <div class="col-4">
-              <label for="customRange1" class="form-label">Precio Maximo {{maxPrice | currency : "COP $" : "symbol" : "0.0-0"}}</label>
-                <input type="range" class="form-range" min="10000" max="9999999" id="customRange2" [(ngModel)]="maxPrice" (input)="advancedFilters('max')">
+              <label for="customRange1" class="form-label"
+                >Precio Maximo
+                {{ maxPrice | currency : "COP $" : "symbol" : "0.0-0" }}</label
+              >
+              <input
+                type="range"
+                class="form-range"
+                min="10000"
+                max="9999999"
+                id="customRange2"
+                [(ngModel)]="maxPrice"
+                (input)="advancedFilters('max')"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Listar productos  -->
     <div class="row">
       <div
-        class="col-sm-12 col-md-6 col-lg-4 col-xl-2"
+        class="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2"
         *ngFor="let item of itemsFilters"
       >
-        <div class="card mb-3 position-relative" style="width: 18rem">
-          <img [src]="item.image" class="card-img-top" alt="..." />
-          <div class="card-body mt-1">
-            <h5 class="card-title">{{ item?.name }}</h5>
-            <p class="card-text">{{ item.adjetive }}</p>
-            <span><b><i class="ti ti-category"></i> Categoria:</b> {{ item.category}}</span>
-          </div>
-          <div class="card-body text-center pt-0">
-            <button class="btn btn-dark"><i class="ti ti-plus"></i> Añadir al carro</button>
-          </div>
-          <span class="price badge text-bg-info position-absolute"><b><i class="ti ti-tag"> </i></b>
-            {{ item.price | currency : "COP $" : "symbol" : "0.0-0" }}</span>
-        </div>
+        <app-product
+          [item]="item"
+          (addProduct)="addItemCar($event)"
+          (openProduct)="openProduct($event)"
+        ></app-product>
       </div>
     </div>
   </div>
+
+  <!-- Detalle del componente -->
+  <app-detail-product
+    [product]="itemDetail"
+    [hidden]="!showDetailItem"
+    (closeDetail)="closeDetail()"
+    (addProduct)="addItemCar($event)"
+  ></app-detail-product>
+
+  <!-- lista de compras  -->
+  <app-list-cart
+    [hidden]="!showCart"
+    (closeCart)="toogleCart(false)"
+    >
+  </app-list-cart>
 </div>

@@ -1,0 +1,34 @@
+<div class="panel">
+  <div class="pointer btn btn-danger rounded-0" (click)="closeDetailFN()">
+    &times;
+  </div>
+  <div class="card">
+    <img class="card-img-top" [src]="product.image" alt="Card image cap" />
+    <div class="card-body">
+      <h5 class="card-title">{{ product?.name }}</h5>
+      <p class="card-text">{{ product.adjetive }}</p>
+      <p class="card-text">
+        <b><i class="ti ti-file-description"></i> Descripción:</b>
+        {{ product.description }}
+      </p>
+      <p class="card-text">
+        <b><i class="ti ti-file-description"></i> Material:</b>
+        {{ product.material }}
+      </p>
+      <p
+        ><b><i class="ti ti-category"></i> Categoria:</b>
+        {{ product.category }}</p
+      >
+      <p class="price"
+        ><b><i class="ti ti-tag"> </i>Precio: </b>
+        {{ product.price | currency : "COP $" : "symbol" : "0.0-0" }}</p
+      >
+    </div>
+
+    <div class="card-footer text-center">
+      <button class="btn btn-dark" (click)="addProductFN()">
+        <i class="ti ti-plus"></i> Añadir al carro
+      </button>
+    </div>
+  </div>
+</div>

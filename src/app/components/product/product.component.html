@@ -1,0 +1,22 @@
+<div class="card mb-3 position-relative" style="width: 18rem">
+  <a style="cursor: pointer;" (click)="openProductFN()">
+    <img [src]="item.image" class="card-img-top" alt="..." />
+  </a>
+  <div class="card-body mt-1">
+    <h5 class="card-title">{{ item?.name }}</h5>
+    <p class="card-text">{{ item.adjetive }}</p>
+    <span
+      ><b><i class="ti ti-category"></i> Categoria:</b>
+      {{ item.category }}</span
+    >
+  </div>
+  <div class="card-body text-center pt-0">
+    <button class="btn btn-dark" (click)="addProductFN()">
+      <i class="ti ti-plus"></i> Añadir al carro
+    </button>
+  </div>
+  <span class="price badge text-bg-info position-absolute"
+    ><b><i class="ti ti-tag"> </i></b>
+    {{ item.price | currency : "COP $" : "symbol" : "0.0-0" }}</span
+  >
+</div>
